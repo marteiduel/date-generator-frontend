@@ -17,7 +17,7 @@ const ActivityForm = props => {
 
   React.useEffect(() => {
     if (props.id && props.editMode) {
-      fetch(`http://localhost:5000/activity/${props.id}`)
+      fetch(`https://backend-date-generator.herokuapp.com/activity/${props.id}`)
         .then(response => response.json())
         .then(data => {
           setName(data.name);
@@ -68,25 +68,28 @@ const ActivityForm = props => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (props.editMode) {
-      await fetch(`http://localhost:5000/activity/${props.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          name: name,
-          avg_price: avg_price,
-          location: location,
-          picture: picture,
-          description: description,
-          type: type
-        })
-      })
+      await fetch(
+        `https://backend-date-generator.herokuapp.com/activity/${props.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            name: name,
+            avg_price: avg_price,
+            location: location,
+            picture: picture,
+            description: description,
+            type: type
+          })
+        }
+      )
         .then(pictureRef.current.dropzone.removeAllFiles())
         .catch(error => console.log("put error", error));
     } else {
-      await fetch("http://localhost:5000/add-activity", {
+      await fetch("https://backend-date-generator.herokuapp.com/add-activity", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

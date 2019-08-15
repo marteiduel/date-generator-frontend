@@ -9,7 +9,7 @@ const Home = props => {
   const [activities, setActivities] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://127.0.0.1:5000/restaurants")
+    fetch("https://backend-date-generator.herokuapp.com/restaurants")
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -32,7 +32,7 @@ const Home = props => {
   // };
 
   // const deleteRestaurant = id => {
-  //   fetch(`http://127.0.0.1:5000/restaurant/${id}`, {
+  //   fetch(`https://backend-date-generator.herokuapp.com/restaurant/${id}`, {
   //     method: "DELETE"
   //   })
   //     .then(
@@ -61,7 +61,7 @@ const Home = props => {
   };
 
   React.useEffect(() => {
-    fetch("http://127.0.0.1:5000/activities")
+    fetch("https://backend-date-generator.herokuapp.com/activities")
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -82,7 +82,7 @@ const Home = props => {
   // };
 
   // const deleteActivity = id => {
-  //   fetch(`http://127.0.0.1:5000/activities/${id}`, {
+  //   fetch(`https://backend-date-generator.herokuapp.com/activities/${id}`, {
   //     method: "DELETE"
   //   })
   //     .then(setActivities(activities.filter(activity => activity.id !== id)))

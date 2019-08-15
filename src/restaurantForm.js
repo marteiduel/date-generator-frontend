@@ -17,7 +17,9 @@ const UserForm = props => {
 
   React.useEffect(() => {
     if (props.id && props.editMode) {
-      fetch(`http://localhost:5000/restaurant/${props.id}`)
+      fetch(
+        `https://backend-date-generator.herokuapp.com/restaurant/${props.id}`
+      )
         .then(response => response.json())
         .then(data => {
           setName(data.name);
@@ -68,39 +70,45 @@ const UserForm = props => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (props.editMode) {
-      await fetch(`http://localhost:5000/restaurant/${props.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          name: name,
-          avg_price: avg_price,
-          location: location,
-          picture: picture,
-          description: description,
-          type: type
-        })
-      })
+      await fetch(
+        `https://backend-date-generator.herokuapp.com/restaurant/${props.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            name: name,
+            avg_price: avg_price,
+            location: location,
+            picture: picture,
+            description: description,
+            type: type
+          })
+        }
+      )
         .then(pictureRef.current.dropzone.removeAllFiles())
         .catch(error => console.log("put error", error));
     } else {
-      await fetch("http://localhost:5000/add-restaurant", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify({
-          name: name,
-          picture: picture,
-          avg_price: avg_price,
-          location: location,
-          description: description,
-          type: type
-        })
-      })
+      await fetch(
+        "https://backend-date-generator.herokuapp.com/add-restaurant",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            name: name,
+            picture: picture,
+            avg_price: avg_price,
+            location: location,
+            description: description,
+            type: type
+          })
+        }
+      )
         .then(result => result.json())
         .then(setName(""))
         .then(setPicture(""))
